@@ -315,7 +315,7 @@ type ClusterStatus struct {
 	DanglingPVC []string `json:"danglingPVC,omitempty"`
 
 	// List of all the PVCs that have ResizingPVC condition.
-	ResizingPVC []string `json:"resizingPVC,omitempty"`
+	ResizingPVC []ResizingPVCInformation `json:"resizingPVC,omitempty"`
 
 	// List of all the PVCs that are being initialized by this cluster
 	InitializingPVC []string `json:"initializingPVC,omitempty"`
@@ -426,6 +426,17 @@ type EmbeddedObjectMetadata struct {
 // PoolerIntegrations encapsulates the needed integration for the poolers referencing the cluster
 type PoolerIntegrations struct {
 	PgBouncerIntegration PgBouncerIntegrationStatus `json:"pgBouncerIntegration,omitempty"`
+}
+
+type ResizingPVCInformation struct {
+	//name is the name of the resizing PVC
+	Name string `json:"name,omitempty"`
+
+	//current is the actual current size of the PVC
+	Current string `json:"current,omitempty"`
+
+	//desired is the desired size, the one that we are resizing to
+	Desired string `json:"desired,omitempty"`
 }
 
 // PgBouncerIntegrationStatus encapsulates the needed integration for the pgbouncer poolers referencing the cluster
